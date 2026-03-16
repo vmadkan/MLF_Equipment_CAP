@@ -1,0 +1,6 @@
+RepairID,ID,EquipmentID_ID,EquipmentID_EquipmentID,FailureCode,Description,Resolution,RepairDate
+1,PUMP-1001,F001,Pump overheating due to seal wear,Replaced mechanical seal,2024-03-10
+2,PUMP-1001,F002,Abnormal vibration detected,Bearing replacement,2024-06-12
+3,PUMP-1002,F003,Reduced flow output,Impeller cleaning,2024-04-15
+4,COMP-3001,F004,High discharge temperature,Adjusted lubrication system,2024-07-20
+5,MOTOR-9001,F005,Motor overheating,Replaced cooling fan,2024-02-18

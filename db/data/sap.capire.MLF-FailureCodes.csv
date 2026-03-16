@@ -1,0 +1,6 @@
+FailureCode,FailureDescription,FailureCategory
+F001,Seal Wear,Mechanical
+F002,Bearing Failure,Mechanical
+F003,Impeller Blockage,Hydraulic
+F004,Lubrication Fault,Thermal
+F005,Cooling Failure,Electrical
