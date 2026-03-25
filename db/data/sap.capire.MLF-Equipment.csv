@@ -1,4 +1,4 @@
-EquipmentID,ID,EquipmentName,ModelNumber,FunctionalLocation,Plant
+EquipmentID,EquipmentName,ModelNumber,FunctionalLocation,Plant
 PUMP-1001,Feed Water Pump,PX-200,FL-100,Plant-A
 PUMP-1002,Cooling Pump,PX-210,FL-200,Plant-A
 COMP-3001,Air Compressor,AC-450,FL-300,Plant-B

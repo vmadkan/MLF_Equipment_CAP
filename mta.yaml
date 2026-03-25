@@ -1,0 +1,205 @@
+_schema-version: '3.1'
+ID: MLF_Equipment_MVP
+version: 1.0.0
+description: A simple CAP project.
+parameters:
+  deploy_mode: html5-repo
+  enable-parallel-deployments: true
+  subdomain: deloittegenaihubcf-ydd7grnx
+build-parameters:
+  before-all:
+    - builder: custom
+      commands:
+        - rm -rf build/dist
+        - mkdir -p build/dist
+        - rm -rf build/ui-deployer
+        - mkdir -p build/ui-deployer
+    - builder: custom
+      commands:
+        - npm install --production
+        - >-
+          bash -c "cds -v | grep 'cds-dk' || npm i --production --no-save
+          @sap/cds-dk"
+        - bash -c "export PATH=$PATH:$(pwd)/node_modules/.bin"
+        - cds build --production
+  after-all:
+    - builder: custom
+      commands:
+        - npm install
+modules:
+  - name: MLF_Equipment_MVP-db-deployer
+    type: hdb
+    path: gen/db
+    parameters:
+      buildpack: nodejs_buildpack
+    build-parameters:
+      builder: npm
+      ignore:
+        - node_modules
+        - package-lock.json
+    requires:
+      - name: MLF_Equipment_MVP-service-uaa
+      - name: MLF_Equipment_MVP-service-db
+  - name: MLF_Equipment_MVP-srv
+    type: nodejs
+    path: gen/srv
+    parameters:
+      memory: 256MB
+    provides:
+      - name: srv-api
+        properties:
+          srv-url: ${default-url}
+    build-parameters:
+      builder: npm
+      ignore:
+        - node_modules
+        - package-lock.json
+    requires:
+      - name: MLF_Equipment_MVP-service-uaa
+      - name: MLF_Equipment_MVP-service-db
+      - name: MLF_Equipment_MVP-service-destination
+      - name: MLF_Equipment_MVP-service-metadata
+      - name: MLF_Equipment_MVP-service-connectivity
+      - name: MLF_Equipment_MVP-service-logs
+  - name: MLF_Equipment_MVP-aux-destinations
+    type: com.sap.application.content
+    parameters:
+      content:
+        subaccount:
+          existing_destinations_policy: update
+          destinations:
+            - Authentication: OAuth2UserTokenExchange
+              Name: MLF_Equipment_MVP-service-uaa
+              ServiceInstanceName: MLF_Equipment_MVP-uaa
+              ServiceKeyName: MLF_Equipment_MVP-uaa-key
+              sap.cloud.service: lcap.MLF_Equipment_MVP
+            - Authentication: OAuth2UserTokenExchange
+              Name: MLF_Equipment_MVP-app-srv
+              TokenServiceInstanceName: MLF_Equipment_MVP-uaa
+              TokenServiceKeyName: MLF_Equipment_MVP-uaa-key
+              URL: ~{srv-api/srv-url}
+              sap.cloud.service: lcap.MLF_Equipment_MVP
+            - Name: MLF_Equipment_MVP-service-html5-apps-repo-host
+              ServiceInstanceName: MLF_Equipment_MVP-html5-apps-repo-host
+              ServiceKeyName: MLF_Equipment_MVP-html5-apps-repo-host-key
+              sap.cloud.service: lcap.MLF_Equipment_MVP
+            - Authentication: OAuth2UserTokenExchange
+              Name: MLF_Equipment_MVP-ProcessorService
+              TokenServiceInstanceName: MLF_Equipment_MVP-uaa
+              TokenServiceKeyName: MLF_Equipment_MVP-uaa-key
+              URL: ~{srv-api/srv-url}/odata/v4/processor
+              sap.cloud.service: lcap.MLF_Equipment_MVP
+              sap.applicationdevelopment.actions.enabled: true
+              sap.processautomation.enabled: true
+              HTML5.DynamicDestination: true
+              WebIDEEnabled: true
+              WebIDEUsage: odata_abap, dev_abap
+              WebIDESystem: Gateway
+              MobileEnabled: true
+              AppgyverEnabled: true
+              sap.build.usage: CAP
+              sap-platform: ABAP
+              sap.lcnc.fetchXcsrf: false
+    build-parameters:
+      no-source: true
+    requires:
+      - name: MLF_Equipment_MVP-service-uaa
+        parameters:
+          service-key:
+            name: MLF_Equipment_MVP-uaa-key
+      - name: srv-api
+      - name: MLF_Equipment_MVP-service-html5-apps-repo-host
+        parameters:
+          service-key:
+            name: MLF_Equipment_MVP-html5-apps-repo-host-key
+      - name: MLF_Equipment_MVP-service-destination
+        parameters:
+          content-target: true
+  - name: MLF_Equipment_MVP-launchpad
+    type: html5
+    path: build/launchpad
+    build-parameters:
+      builder: custom
+      commands:
+        - npm install
+        - >-
+          npx -p @ui5/cli@^3.0.0 ui5 build --dest dist
+          --include-task=generateCachebusterInfo
+        - bash -c "cd dist && npx bestzip ../../../build/dist/launchpad.zip *"
+        - rm -rf dist
+      _artifactName: launchpad.zip
+      supported-platforms: []
+      build-result: ../../build/dist
+  - name: MLF_Equipment_MVP-aux-ui-deployer
+    type: com.sap.application.content
+    path: build/ui-deployer
+    build-parameters:
+      build-result: resources
+      requires:
+        - name: MLF_Equipment_MVP-launchpad
+          artifacts:
+            - launchpad.zip
+          target-path: resources
+    requires:
+      - name: MLF_Equipment_MVP-service-html5-apps-repo-host
+        parameters:
+          content-target: true
+resources:
+  - type: org.cloudfoundry.managed-service
+    name: MLF_Equipment_MVP-service-uaa
+    parameters:
+      service: xsuaa
+      service-plan: application
+      service-name: MLF_Equipment_MVP-uaa
+      path: xs-security.json
+      config:
+        oauth2-configuration:
+          redirect-uris:
+            - https://${subdomain}.launchpad.${default-domain}/login/*
+            - https://${subdomain}.${default-domain}/login/*
+          credential-types:
+            - binding-secret
+            - x509
+        xsappname: MLF_Equipment_MVP-${space}
+        role-collections: []
+  - type: org.cloudfoundry.managed-service
+    name: MLF_Equipment_MVP-service-db
+    parameters:
+      service: hana
+      service-plan: hdi-shared
+      service-name: MLF_Equipment_MVP-db
+  - type: org.cloudfoundry.managed-service
+    name: MLF_Equipment_MVP-service-destination
+    parameters:
+      service: destination
+      service-plan: lite
+      service-name: MLF_Equipment_MVP-destination
+      config:
+        HTML5Runtime_enabled: true
+        version: 1.0.0
+  - type: org.cloudfoundry.user-provided-service
+    name: MLF_Equipment_MVP-service-metadata
+    parameters:
+      service: metadata
+      service-plan: standard
+      service-name: MLF_Equipment_MVP-metadata
+      config:
+        default-domain: ${default-domain}
+  - type: org.cloudfoundry.managed-service
+    name: MLF_Equipment_MVP-service-connectivity
+    parameters:
+      service: connectivity
+      service-plan: lite
+      service-name: MLF_Equipment_MVP-connectivity
+  - type: org.cloudfoundry.managed-service
+    name: MLF_Equipment_MVP-service-logs
+    parameters:
+      service: application-logs
+      service-plan: lite
+      service-name: MLF_Equipment_MVP-logs
+  - type: org.cloudfoundry.managed-service
+    name: MLF_Equipment_MVP-service-html5-apps-repo-host
+    parameters:
+      service: html5-apps-repo
+      service-plan: app-host
+      service-name: MLF_Equipment_MVP-html5-apps-repo-host

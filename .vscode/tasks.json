@@ -64,6 +64,18 @@
       "label": "Enable Discovery and Deploy MLF_Equipment_MVP",
       "taskType": "Deploy",
       "enableDiscovery": "true"
+    },
+    {
+      "type": "build.mta",
+      "label": "Build MTA: MLF_Equipment_MVP - PT",
+      "taskType": "Build",
+      "projectPath": "/home/user/projects/CAP_MLF_Equipment",
+      "extensions": [],
+      "ui5theme": "sap_horizon",
+      "vendorDependency": false,
+      "buildCodeServicePlan": true,
+      "subdomain": "deloittegenaihubcf-ydd7grnx",
+      "ui5version": "1.144.1"
     }
   ]
 }

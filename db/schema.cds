@@ -1,34 +1,43 @@
-using {
+/*using {
   cuid,
   managed,
   sap.common.CodeList
 } from '@sap/cds/common';
-
+*/
 namespace sap.capire.MLF;
 
 /**
 * Equipment.
 */
 
-entity Equipment : cuid, managed {
-key EquipmentID : String;
-    EquipmentName : String;
-    ModelNumber : String;
-    FunctionalLocation : String;
-    Plant : String;
+entity Equipment {
+  key EquipmentID        : String;
+      EquipmentName      : String;
+      ModelNumber        : String;
+      FunctionalLocation : String;
+      Plant              : String;
+      RepairHistory      : Composition of many  {
+                             //  key EquipmentID : String;                                                                         
+                                 RepairID    : String;
+                                 FailureCode : String;
+                                 Description : String;
+                                 Resolution  : String;
+                                 RepairDate  : Date;
+                           }
 }
 
-entity RepairHistory : cuid, managed {
-    key RepairID : String;
-        EquipmentID : Association to Equipment;
-        FailureCode : String;
-        Description : String;
-        Resolution : String;
-        RepairDate : Date @UI.DateTimeStyle : 'YYYY-MM-DD';
+entity FailureCodes {
+  key EquipmentID        : Association to Equipment;
+      FailureCode        : String;
+      FailureDescription : String;
+      FailureCategory    : String;
 }
 
-entity FailureCodes : managed {
-    FailureCode : String;
-    FailureDescription : String;
-    FailureCategory : String;
-}
+/*entity RepairHistory {
+  key EquipmentID : Association to Equipment;
+      RepairID    : String;
+      FailureCode : String;
+      Description : String;
+      Resolution  : String;
+      RepairDate  : Date;
+/* @UI.DateTimeStyle: 'YYYY-MM-DD';*/

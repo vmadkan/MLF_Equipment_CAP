@@ -1,6 +1,6 @@
-FailureCode,FailureDescription,FailureCategory
-F001,Seal Wear,Mechanical
-F002,Bearing Failure,Mechanical
-F003,Impeller Blockage,Hydraulic
-F004,Lubrication Fault,Thermal
-F005,Cooling Failure,Electrical
+FailureCode;FailureDescription;FailureCategory;EquipmentID_EquipmentID
+F001;Seal Wear;Mechanical;PUMP-1001
+F002;Bearing Failure;Mechanical;PUMP-1002
+F003;Impeller Blockage;Hydraulic;COMP-3001
+F004;Lubrication Fault;Thermal;MOTOR-9001
+F005;Cooling Failure;Electrical;VALVE-1201

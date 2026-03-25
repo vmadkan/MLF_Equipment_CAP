@@ -2,5 +2,6 @@
   "scopes": [],
   "attributes": [],
   "role-templates": [],
-  "authorities-inheritance": false
+  "xsappname": "MLF_Equipment_MVP",
+  "tenant-mode": "dedicated"
 }
