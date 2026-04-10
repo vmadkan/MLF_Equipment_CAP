@@ -90,6 +90,18 @@
       "dependsOn": [
         "Build MTA: MLF_Equipment_MVP - PT"
       ]
+    },
+    {
+      "type": "build.mta",
+      "label": "Build MTA: MLF_Equipment_MVP - PT (2)",
+      "taskType": "Build",
+      "projectPath": "/home/user/projects/MLF_Equipment_CAP",
+      "extensions": [],
+      "ui5theme": "sap_horizon",
+      "vendorDependency": false,
+      "buildCodeServicePlan": true,
+      "subdomain": "",
+      "ui5version": "1.144.1"
     }
   ]
 }

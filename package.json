@@ -1,5 +1,5 @@
 {
-  "name": "MLF_Equipment_MVP",
+  "name": "mlf-equipment-mvp",
   "version": "1.0.0",
   "description": "A simple CAP project.",
   "dependencies": {
@@ -7,7 +7,7 @@
     "@sap-cloud-sdk/http-client": "^4.5.1",
     "@sap-cloud-sdk/util": "^4.5.1",
     "@sap/cds": "^9",
-    "@sap/low-code-event-handler": "^1.2.5",
+    "@sap/low-code-event-handler": "^1.2.2",
     "@sap/xsenv": ">=3.3.2 <3.3.3",
     "@sap/xssec": "^4.12.2",
     "express": "^4",
