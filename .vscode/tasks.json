@@ -76,6 +76,20 @@
       "buildCodeServicePlan": true,
       "subdomain": "deloittegenaihubcf-ydd7grnx",
       "ui5version": "1.144.1"
+    },
+    {
+      "type": "deploy.mta.cf",
+      "label": "Deploy MTA to Cloud Foundry: MLF_Equipment_MVP - PT",
+      "taskType": "Deploy",
+      "mtarPath": "/home/user/projects/MLF_Equipment_CAP/mta_archives/*.mtar",
+      "cfTarget": "",
+      "cfEndpoint": "",
+      "cfOrg": "",
+      "cfSpace": "",
+      "extensions": [],
+      "dependsOn": [
+        "Build MTA: MLF_Equipment_MVP - PT"
+      ]
     }
   ]
 }

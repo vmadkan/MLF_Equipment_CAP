@@ -33,11 +33,13 @@ entity FailureCodes {
       FailureCategory    : String;
 }
 
-/*entity RepairHistory {
+/*
+entity RepairHistory {
   key EquipmentID : Association to Equipment;
       RepairID    : String;
       FailureCode : String;
       Description : String;
       Resolution  : String;
       RepairDate  : Date;
-/* @UI.DateTimeStyle: 'YYYY-MM-DD';*/
+}
+*/
