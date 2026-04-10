@@ -22,7 +22,8 @@
     "start": "cds-serve",
     "start-local": "npm run generate-entry-point && npm run cds-watch",
     "generate-entry-point": "dev-cap-tools gen-entrypoint",
-    "cds-watch": "cds watch --open"
+    "cds-watch": "cds watch --open",
+    "cds-watch-hybrid": "cds watch --profile hybrid --open"
   },
   "private": true,
   "cds": {

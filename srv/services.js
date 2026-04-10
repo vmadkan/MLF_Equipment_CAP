@@ -1,49 +1,54 @@
-
 const cds = require('@sap/cds')
 
-module.exports = cds.service.impl(function () {
-
+module.exports = cds.service.impl(async function () {
   if (this.name !== 'DMSService') return
+
   console.log('✅ Handler bound to', this.name)
 
   this.on('GetFolderContent', async (req) => {
-    const { repositoryId, folderPath } = req.data
+    try {
+      const dms = await cds.connect.to('DMS')
 
-    if (!repositoryId || !folderPath) {
-      req.reject(400, 'repositoryId and folderPath are required')
+      const response = await dms.send({
+        method: 'GET',
+        path: '/OEMFolder_1?cmisselector=children&succinct=true',
+        headers: {
+          Accept: 'application/json'
+        }
+      })
+
+      console.log('DMS raw response:', JSON.stringify(response, null, 2))
+
+      const objects = response?.objects || []
+
+      return objects.map(entry => {
+        const obj = entry?.object || {}
+        const props = obj?.succinctProperties || obj?.properties || {}
+
+        const getVal = (key) => {
+          const v = props[key]
+          if (v && typeof v === 'object' && 'value' in v) return v.value
+          return v ?? null
+        }
+
+        const baseType = getVal('cmis:baseTypeId')
+
+        return {
+          objectId: getVal('cmis:objectId'),
+          name: getVal('cmis:name'),
+          type: baseType === 'cmis:folder' ? 'folder' : 'document',
+          mimeType: getVal('cmis:contentStreamMimeType'),
+          size: getVal('cmis:contentStreamLength') || 0,
+          createdAt: getVal('cmis:creationDate'),
+          createdBy: getVal('cmis:createdBy')
+        }
+      })
+    } catch (error) {
+      console.error('DMS GetFolderContent failed:', error)
+      req.reject(
+        error.statusCode || 500,
+        error.message || 'Failed to fetch folder content from DMS'
+      )
     }
-
-
-    const normalizedPath = folderPath.startsWith('/root')
-      ? folderPath
-      : `/root${folderPath.startsWith('/') ? '' : '/'}${folderPath}`
-
-    const dms = await cds.connect.to('DMS')
-
-    const cmisUrl =
-      `/browser/${repositoryId}${normalizedPath}?cmisselector=children`
-
-    // ✅ CAP-native call (no Cloud SDK)
-    const response = await dms.get(cmisUrl, {
-      headers: { Accept: 'application/json' }
-    })
-
-    const objects = response?.objects ?? []
-
-    return objects.map(o => {
-      const p = o.object.properties
-
-      return {
-        objectId  : p['cmis:objectId']?.value,
-        name      : p['cmis:name']?.value,
-        type      : p['cmis:baseTypeId']?.value === 'cmis:folder'
-                      ? 'folder'
-                      : 'document',
-        mimeType  : p['cmis:contentStreamMimeType']?.value ?? null,
-        size      : p['cmis:contentStreamLength']?.value ?? 0,
-        createdAt : p['cmis:creationDate']?.value,
-        createdBy : p['cmis:createdBy']?.value
-      }
-    })
   })
 })
