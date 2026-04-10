@@ -96,6 +96,19 @@ modules:
               WebIDEEnabled: false
               MobileEnabled: false
               AppgyverEnabled: false
+            - Authentication: OAuth2UserTokenExchange
+              Name: MLF_Equipment_MVP-DMSService
+              TokenServiceInstanceName: MLF_Equipment_MVP-uaa
+              TokenServiceKeyName: MLF_Equipment_MVP-uaa-key
+              URL: ~{srv-api/srv-url}/odata/v4/dms
+              sap.cloud.service: lcap.MLF_Equipment_MVP
+              sap.applicationdevelopment.actions.enabled: false
+              sap.build.usage: CAP
+              sap.processautomation.enabled: false
+              HTML5.DynamicDestination: false
+              WebIDEEnabled: false
+              MobileEnabled: false
+              AppgyverEnabled: false
     build-parameters:
       no-source: true
     requires:

@@ -7,6 +7,12 @@
   },
   "routes": [
     {
+      "source": "^/odata/v4/dms/(.*)$",
+      "target": "/odata/v4/dms/$1",
+      "destination": "MLF_Equipment_MVP-app-srv",
+      "authenticationType": "xsuaa"
+    },
+    {
       "source": "^/odata/v4/processor/(.*)$",
       "target": "/odata/v4/processor/$1",
       "destination": "MLF_Equipment_MVP-app-srv",

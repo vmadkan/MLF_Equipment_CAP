@@ -1,5 +1,5 @@
 {
   "ProjectOverviewURL": "https://deloittegenaihubcf-ydd7grnx.launchpad.cfapps.eu10.hana.ondemand.com/lcapMLF_Equipment_MVP.MLF_Equipment_MVPLaunchpad-1.0.0",
-  "DeployedUTCTime": "2026-03-25T18:19:25.421Z",
+  "DeployedUTCTime": "2026-04-10T15:11:18.101Z",
   "ApplicationLogURL": "https://logs.cf.eu10-004.hana.ondemand.com/app/dashboards#/view/Overview?_g=(filters:!((query:(match_phrase:(component_name:MLF_Equipment_MVP-srv)))))"
 }

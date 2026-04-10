@@ -16,9 +16,9 @@ entity Equipment {
       ModelNumber        : String;
       FunctionalLocation : String;
       Plant              : String;
-      RepairHistory      : Composition of many  {
-                             //  key EquipmentID : String;                                                                         
-                                 RepairID    : String;
+      RepairHistory      : Composition of many {
+                                 //  key EquipmentID : String;
+                             key RepairID    : String;
                                  FailureCode : String;
                                  Description : String;
                                  Resolution  : String;

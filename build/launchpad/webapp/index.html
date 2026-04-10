@@ -27,7 +27,7 @@
                     return Controller.extend("PreviewController", {
                         onInit: function () {
 
-                            const data = {"Services":[{"ServiceName":"ProcessorService","DetailsURL":"./odata/v4/processor/","Metadata":"./odata/v4/processor/$metadata","Entities":[{"Name":"Equipment","URL":"./odata/v4/processor/Equipment","FioriURL":""},{"Name":"FailureCodes","URL":"./odata/v4/processor/FailureCodes","FioriURL":""}],"EntitiesCount":2}]}
+                            const data = {"Services":[{"ServiceName":"ProcessorService","DetailsURL":"./odata/v4/processor/","Metadata":"./odata/v4/processor/$metadata","Entities":[{"Name":"Equipment","URL":"./odata/v4/processor/Equipment","FioriURL":""},{"Name":"FailureCodes","URL":"./odata/v4/processor/FailureCodes","FioriURL":""}],"EntitiesCount":2},{"ServiceName":"DMSService","DetailsURL":"./odata/v4/dms/","Metadata":"./odata/v4/dms/$metadata","Entities":[{"Name":"FolderContent","URL":"./odata/v4/dms/FolderContent","FioriURL":""}],"EntitiesCount":1}]}
                             this.getView().setModel(new JSONModel(data));
                         }
                     });
