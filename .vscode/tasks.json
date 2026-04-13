@@ -102,6 +102,18 @@
       "buildCodeServicePlan": true,
       "subdomain": "",
       "ui5version": "1.144.1"
+    },
+    {
+      "type": "build.mta",
+      "label": "Build MTA: mlf-equipment-mvp - PT",
+      "taskType": "Build",
+      "projectPath": "/home/user/projects/MLF_Equipment_CAP",
+      "extensions": [],
+      "ui5theme": "sap_horizon",
+      "vendorDependency": false,
+      "buildCodeServicePlan": true,
+      "subdomain": "",
+      "ui5version": "1.144.1"
     }
   ]
 }

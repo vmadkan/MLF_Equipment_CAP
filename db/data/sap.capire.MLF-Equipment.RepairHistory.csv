@@ -1,6 +1,26 @@
 RepairID;FailureCode;Description;Resolution;RepairDate;up__EquipmentID
 1;F001;Pump overheating due to seal wear;Replaced mechanical seal;2024-03-10;PUMP-1001
-2;F002;Abnormal vibration detected;Bearing replacement;2024-06-12;PUMP-1002
-3;F003;Reduced flow output;Impeller cleaning;2024-04-15;COMP-3001
-4;F004;High discharge temperature;Adjusted lubrication system;2024-07-20;MOTOR-9001
-5;F005;Motor overheating;Replaced cooling fan;2024-02-18;VALVE-1201
+2;F002;Reduced flow output;Impeller cleaning;2024-04-15;PUMP-1002
+3;F003;High discharge temperature;Adjusted lubrication system;2024-07-20;COMP-3001
+4;F004;Motor overheating;Replaced cooling fan;2024-02-18;MOTOR-9001
+5;F005;Abnormal vibration detected;Bearing replacement;2024-06-12;VALVE-1201
+6;F006;Compressor pressure drop under load;Replaced inlet valve and recalibrated pressure setpoint;2024-07-30;PUMP-1001
+7;F007;Oil carryover observed in discharge;Replaced oil separator element and topped up oil;2024-08-06;PUMP-1002
+8;F008;Excessive discharge temperature;Cleaned intercooler and verified lubrication flow;2024-08-13;COMP-3001
+9;F009;Abnormal compressor noise / rotor rub;Inspected rotor clearances and replaced worn coupling;2024-08-20;MOTOR-9001
+10;F010;Motor insulation resistance low;Dried windings and performed insulation resistance re-test;2024-08-27;VALVE-1201
+11;F011;Motor coupling misalignment causing vibration;Laser aligned motor and replaced flexible coupling element;2024-09-03;PUMP-1001
+12;F012;Cooling fan failure / airflow restricted;Replaced fan and cleaned air passages;2024-09-10;PUMP-1002
+13;F013;Overcurrent trip during start;"Checked starter settings and replaced contactor; verified load";2024-09-17;COMP-3001
+14;F014;Seal leakage at pump casing;Replaced seal kit and verified leak tightness;2024-09-24;MOTOR-9001
+15;F015;Cavitation due to low suction pressure;Adjusted suction line, checked NPSH and removed blockage;2024-10-01;VALVE-1201
+16;F016;Bearing temperature high;Replaced bearings and performed vibration alignment check;2024-10-08;PUMP-1001
+17;F017;Pump not priming / air ingress;"Reprimed pump and tightened suction fittings; replaced gasket";2024-10-15;PUMP-1002
+18;F018;Seal leakage at pump casing;Replaced seal kit and verified leak tightness;2024-10-22;COMP-3001
+19;F019;Cavitation due to low suction pressure;Adjusted suction line, checked NPSH and removed blockage;2024-10-29;MOTOR-9001
+20;F020;Bearing temperature high;Replaced bearings and performed vibration alignment check;2024-11-05;VALVE-1201
+21;F021;Pump not priming / air ingress;"Reprimed pump and tightened suction fittings; replaced gasket";2024-11-12;PUMP-1001
+22;F022;Valve sticking due to debris;Cleaned valve internals and installed upstream strainer;2024-11-19;PUMP-1002
+23;F023;Actuator not responding;Checked wiring and replaced actuator control board;2024-11-26;COMP-3001
+24;F024;Seat leakage detected;"Lapped seat and replaced seat ring; performed leak test";2024-12-03;MOTOR-9001
+25;F025;Positioner calibration drift;Recalibrated positioner and updated firmware parameters;2024-12-10;VALVE-1201
