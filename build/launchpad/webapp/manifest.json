@@ -59,7 +59,7 @@
       "config": {
         "routerClass": "sap.m.routing.Router",
         "viewType": "XML",
-        "viewPath": "launchpad.view",
+        "path": "launchpad.view",
         "controlId": "idAppControl",
         "controlAggregation": "pages",
         "async": true
