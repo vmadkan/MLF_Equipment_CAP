@@ -9,7 +9,6 @@ namespace sap.capire.MLF;
 /**
 * Equipment.
 */
-
 entity Equipment {
   key EquipmentID        : String;
       EquipmentName      : String;
@@ -33,13 +32,10 @@ entity FailureCodes {
       FailureCategory    : String;
 }
 
-/*
-entity RepairHistory {
-  key EquipmentID : Association to Equipment;
-      RepairID    : String;
-      FailureCode : String;
-      Description : String;
-      Resolution  : String;
-      RepairDate  : Date;
+entity EquipmentContext {
+  key EquipmentID        : Association to Equipment;
+      EquipmentName      : String;
+      FunctionalLocation : String;
+      ModelNumber        : String;
+      Plant              : String;
 }
-*/

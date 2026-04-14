@@ -1,0 +1,6 @@
+EquipmentName;ModelNumber;FunctionalLocation;Plant;EquipmentID_EquipmentID
+Feed Water Pump;PX-200;FL-100;Plant-A;PUMP-1001
+Cooling Pump;PX-210;FL-200;Plant-A;PUMP-1002
+Air Compressor;AC-450;FL-300;Plant-B;COMP-3001
+Drive Motor;DM-600;FL-400;Plant-A;MOTOR-9001
+Pressure Valve;PV-100;FL-500;Plant-C;VALVE-1201
