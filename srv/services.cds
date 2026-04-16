@@ -16,7 +16,8 @@ service ProcessorService {
     };
 }
 
-// @path: 'dms'
+// @path: 'dms' - OLD 
+/*
 service DMSService {
     entity FolderContent {
         key objectId  : String;
@@ -32,4 +33,18 @@ service DMSService {
         repositoryId : String,
         folderPath   : String
     ) returns array of FolderContent;
+}*/
+
+service DMSService {
+     entity FolderContent {
+        key objectId  : String;
+            name      : String;
+            type      : String;
+            mimeType  : String;
+            size      : Integer64;
+            createdAt : Timestamp;
+            createdBy : String;
+    }
+
+    function GetFolderContent() returns array of FolderContent;
 }

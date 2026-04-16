@@ -9,9 +9,12 @@ module.exports = cds.service.impl(async function () {
     try {
       const dms = await cds.connect.to('DMS')
 
+      // Optional: future-ready (if you reintroduce params)
+      const folderPath = req.data?.folderPath || 'OEMFolder_1'
+
       const response = await dms.send({
         method: 'GET',
-        path: '/OEMFolder_1?cmisselector=children&succinct=true',
+        path: `/${folderPath}?cmisselector=children&succinct=true`,
         headers: {
           Accept: 'application/json'
         }
@@ -43,8 +46,10 @@ module.exports = cds.service.impl(async function () {
           createdBy: getVal('cmis:createdBy')
         }
       })
+
     } catch (error) {
       console.error('DMS GetFolderContent failed:', error)
+
       req.reject(
         error.statusCode || 500,
         error.message || 'Failed to fetch folder content from DMS'

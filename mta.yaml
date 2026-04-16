@@ -97,7 +97,7 @@ modules:
               WebIDESystem: Gateway
               MobileEnabled: true
               AppgyverEnabled: true
-              sap.build.usage: CAP
+              sap.build.usage: odata_gen
               sap-platform: ABAP
               sap.lcnc.fetchXcsrf: false
     build-parameters:
