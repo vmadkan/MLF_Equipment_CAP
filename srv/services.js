@@ -12,6 +12,8 @@ module.exports = cds.service.impl(async function () {
       // Optional: future-ready (if you reintroduce params)
       const folderPath = req.data?.folderPath || 'OEMFolder_1'
 
+      const EquipmentID = (req.data?.EquipmentID || '').trim()
+
       const response = await dms.send({
         method: 'GET',
         path: `/${folderPath}?cmisselector=children&succinct=true`,
@@ -23,6 +25,7 @@ module.exports = cds.service.impl(async function () {
       console.log('DMS raw response:', JSON.stringify(response, null, 2))
 
       const objects = response?.objects || []
+      const equip = EquipmentID.toLowerCase()
 
       return objects.map(entry => {
         const obj = entry?.object || {}
@@ -35,10 +38,11 @@ module.exports = cds.service.impl(async function () {
         }
 
         const baseType = getVal('cmis:baseTypeId')
+        const name = getVal('cmis:name')
 
         return {
           objectId: getVal('cmis:objectId'),
-          name: getVal('cmis:name'),
+          name,
           type: baseType === 'cmis:folder' ? 'folder' : 'document',
           mimeType: getVal('cmis:contentStreamMimeType'),
           size: getVal('cmis:contentStreamLength') || 0,
@@ -46,6 +50,17 @@ module.exports = cds.service.impl(async function () {
           createdBy: getVal('cmis:createdBy')
         }
       })
+
+        .filter(item =>
+          item.type === 'document' &&
+          item.name &&
+          item.name.toLowerCase().includes(equip)
+        )
+      if (results.length === 0) {
+        return req.reject(404, `No document found in ${folderPath} matching EquipmentID: ${EquipmentID}`)
+      }
+
+      return results
 
     } catch (error) {
       console.error('DMS GetFolderContent failed:', error)

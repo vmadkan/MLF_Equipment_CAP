@@ -46,5 +46,7 @@ service DMSService {
             createdBy : String;
     }
 
-    function GetFolderContent() returns array of FolderContent;
+    function GetFolderContent(
+        EquipmentID : String
+    ) returns array of FolderContent;
 }
