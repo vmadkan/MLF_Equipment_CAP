@@ -9,10 +9,9 @@ module.exports = cds.service.impl(async function () {
     try {
       const dms = await cds.connect.to('DMS')
 
-      // Optional: future-ready (if you reintroduce params)
-      const folderPath = req.data?.folderPath || 'OEMFolder_1'
-
+      const folderPath = 'OEMFolder_1'
       const EquipmentID = (req.data?.EquipmentID || '').trim()
+      const equip = EquipmentID.toLowerCase()
 
       const response = await dms.send({
         method: 'GET',
@@ -25,43 +24,38 @@ module.exports = cds.service.impl(async function () {
       console.log('DMS raw response:', JSON.stringify(response, null, 2))
 
       const objects = response?.objects || []
-      const equip = EquipmentID.toLowerCase()
 
-      return objects.map(entry => {
-        const obj = entry?.object || {}
-        const props = obj?.succinctProperties || obj?.properties || {}
+      const results = objects
+        .map((entry) => {
+          const obj = entry?.object || {}
+          const props = obj?.succinctProperties || obj?.properties || {}
 
-        const getVal = (key) => {
-          const v = props[key]
-          if (v && typeof v === 'object' && 'value' in v) return v.value
-          return v ?? null
-        }
+          const getVal = (key) => {
+            const v = props[key]
+            if (v && typeof v === 'object' && 'value' in v) return v.value
+            return v ?? null
+          }
 
-        const baseType = getVal('cmis:baseTypeId')
-        const name = getVal('cmis:name')
+          const baseType = getVal('cmis:baseTypeId')
+          const name = getVal('cmis:name')
 
-        return {
-          objectId: getVal('cmis:objectId'),
-          name,
-          type: baseType === 'cmis:folder' ? 'folder' : 'document',
-          mimeType: getVal('cmis:contentStreamMimeType'),
-          size: getVal('cmis:contentStreamLength') || 0,
-          createdAt: getVal('cmis:creationDate'),
-          createdBy: getVal('cmis:createdBy')
-        }
-      })
-
-        .filter(item =>
+          return {
+            objectId: getVal('cmis:objectId'),
+            name,
+            type: baseType === 'cmis:folder' ? 'folder' : 'document',
+            mimeType: getVal('cmis:contentStreamMimeType'),
+            size: getVal('cmis:contentStreamLength') || 0,
+            createdAt: getVal('cmis:creationDate'),
+            createdBy: getVal('cmis:createdBy')
+          }
+        })
+        .filter((item) =>
           item.type === 'document' &&
           item.name &&
-          item.name.toLowerCase().includes(equip)
+          (!equip || item.name.toLowerCase().includes(equip))
         )
-      if (results.length === 0) {
-        return req.reject(404, `No document found in ${folderPath} matching EquipmentID: ${EquipmentID}`)
-      }
 
-      return results
-
+      return { value: results }
     } catch (error) {
       console.error('DMS GetFolderContent failed:', error)
 

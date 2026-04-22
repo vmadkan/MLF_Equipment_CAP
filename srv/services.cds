@@ -16,8 +16,6 @@ service ProcessorService {
     };
 }
 
-// @path: 'dms' - OLD 
-/*
 service DMSService {
     entity FolderContent {
         key objectId  : String;
@@ -29,24 +27,19 @@ service DMSService {
             createdBy : String;
     }
 
-    function GetFolderContent(
-        repositoryId : String,
-        folderPath   : String
-    ) returns array of FolderContent;
-}*/
-
-service DMSService {
-     entity FolderContent {
-        key objectId  : String;
-            name      : String;
-            type      : String;
-            mimeType  : String;
-            size      : Integer64;
-            createdAt : Timestamp;
-            createdBy : String;
-    }
+    type FolderContentItem : {
+        objectId  : String;
+        name      : String;
+        type      : String;
+        mimeType  : String;
+        size      : Integer64;
+        createdAt : Timestamp;
+        createdBy : String;
+    };
 
     function GetFolderContent(
         EquipmentID : String
-    ) returns array of FolderContent;
+    ) returns {
+        value : many FolderContentItem;
+    };
 }
