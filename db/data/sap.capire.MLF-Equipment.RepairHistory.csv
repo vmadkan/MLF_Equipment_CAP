@@ -24,3 +24,4 @@ RepairID;FailureCode;Description;Resolution;RepairDate;up__EquipmentID
 23;F023;Actuator not responding;Checked wiring and replaced actuator control board;2024-11-26;COMP-3001
 24;F024;Seat leakage detected;"Lapped seat and replaced seat ring; performed leak test";2024-12-03;MOTOR-9001
 25;F025;Positioner calibration drift;Recalibrated positioner and updated firmware parameters;2024-12-10;VALVE-1201
+26;F026;Pressure roller adjustment;Adjust screws so that plunger  will have clearance;2026-04-01;Model-245

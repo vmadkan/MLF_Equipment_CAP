@@ -1,6 +1,7 @@
-EquipmentID,EquipmentName,ModelNumber,FunctionalLocation,Plant
-PUMP-1001,Feed Water Pump,PX-200,FL-100,Plant-A
-PUMP-1002,Cooling Pump,PX-210,FL-200,Plant-A
-COMP-3001,Air Compressor,AC-450,FL-300,Plant-B
-MOTOR-9001,Drive Motor,DM-600,FL-400,Plant-A
-VALVE-1201,Pressure Valve,PV-100,FL-500,Plant-C
+EquipmentID;EquipmentName;ModelNumber;FunctionalLocation;Plant
+PUMP-1001;Feed Water Pump;PX-200;FL-100;Plant-A
+PUMP-1002;Cooling Pump;PX-210;FL-200;Plant-A
+COMP-3001;Air Compressor;AC-450;FL-300;Plant-B
+MOTOR-9001;Drive Motor;DM-600;FL-400;Plant-A
+VALVE-1201;Pressure Valve;PV-100;FL-500;Plant-C
+Model-245;Filled Tray Sealer;TD60;FL-600;Plant-D

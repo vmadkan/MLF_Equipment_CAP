@@ -4,3 +4,4 @@ F002;Bearing Failure;Mechanical;PUMP-1002
 F003;Impeller Blockage;Hydraulic;COMP-3001
 F004;Lubrication Fault;Thermal;MOTOR-9001
 F005;Cooling Failure;Electrical;VALVE-1201
+F026;Pressure Roller Failure;Mechanical;Model-245

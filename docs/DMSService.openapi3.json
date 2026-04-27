@@ -1,0 +1,593 @@
+{
+  "openapi": "3.0.2",
+  "info": {
+    "title": "Use the title annotation on your CDS service to provide a meaningful title.",
+    "description": "Use the Core.LongDescription or Core.Description annotation on your CDS service to provide a meaningful description.",
+    "version": ""
+  },
+  "x-sap-api-type": "ODATAV4",
+  "x-odata-version": "4.01",
+  "x-sap-shortText": "Use the Core.Description annotation on your CDS service to provide a meaningful short text.",
+  "servers": [
+    {
+      "url": "/rest/dms"
+    }
+  ],
+  "tags": [
+    {
+      "name": "Folder Content"
+    }
+  ],
+  "paths": {
+    "/$batch": {
+      "post": {
+        "summary": "Sends a group of requests",
+        "description": "Group multiple requests into a single request payload, see [Batch Requests](http://docs.oasis-open.org/odata/odata/v4.01/odata-v4.01-part1-protocol.html#sec_BatchRequests).\n\n*Please note that \"Try it out\" is not supported for this request.*",
+        "tags": [
+          "Batch Requests"
+        ],
+        "requestBody": {
+          "required": true,
+          "description": "Batch request",
+          "content": {
+            "multipart/mixed;boundary=request-separator": {
+              "schema": {
+                "type": "string"
+              },
+              "example": "--request-separator\nContent-Type: application/http\nContent-Transfer-Encoding: binary\n\nGET FolderContent HTTP/1.1\nAccept: application/json\n\n\n--request-separator--"
+            }
+          }
+        },
+        "responses": {
+          "200": {
+            "description": "Batch response",
+            "content": {
+              "multipart/mixed": {
+                "schema": {
+                  "type": "string"
+                },
+                "example": "--response-separator\nContent-Type: application/http\n\nHTTP/1.1 200 OK\nContent-Type: application/json\n\n{...}\n--response-separator--"
+              }
+            }
+          },
+          "4XX": {
+            "$ref": "#/components/responses/error"
+          }
+        }
+      }
+    },
+    "/FolderContent": {
+      "get": {
+        "summary": "Retrieves a list of folder content.",
+        "tags": [
+          "Folder Content"
+        ],
+        "parameters": [
+          {
+            "$ref": "#/components/parameters/top"
+          },
+          {
+            "$ref": "#/components/parameters/skip"
+          },
+          {
+            "$ref": "#/components/parameters/search"
+          },
+          {
+            "name": "$filter",
+            "description": "Filter items by property values, see [Filtering](http://docs.oasis-open.org/odata/odata/v4.01/odata-v4.01-part1-protocol.html#sec_SystemQueryOptionfilter)",
+            "in": "query",
+            "schema": {
+              "type": "string"
+            }
+          },
+          {
+            "$ref": "#/components/parameters/count"
+          },
+          {
+            "name": "$orderby",
+            "description": "Order items by property values, see [Sorting](http://docs.oasis-open.org/odata/odata/v4.01/odata-v4.01-part1-protocol.html#sec_SystemQueryOptionorderby)",
+            "in": "query",
+            "explode": false,
+            "schema": {
+              "type": "array",
+              "uniqueItems": true,
+              "items": {
+                "type": "string",
+                "enum": [
+                  "objectId",
+                  "objectId desc",
+                  "name",
+                  "name desc",
+                  "type",
+                  "type desc",
+                  "mimeType",
+                  "mimeType desc",
+                  "size",
+                  "size desc",
+                  "createdAt",
+                  "createdAt desc",
+                  "createdBy",
+                  "createdBy desc"
+                ]
+              }
+            }
+          },
+          {
+            "name": "$select",
+            "description": "Select properties to be returned, see [Select](http://docs.oasis-open.org/odata/odata/v4.01/odata-v4.01-part1-protocol.html#sec_SystemQueryOptionselect)",
+            "in": "query",
+            "explode": false,
+            "schema": {
+              "type": "array",
+              "uniqueItems": true,
+              "items": {
+                "type": "string",
+                "enum": [
+                  "objectId",
+                  "name",
+                  "type",
+                  "mimeType",
+                  "size",
+                  "createdAt",
+                  "createdBy"
+                ]
+              }
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Retrieved folder content",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "type": "object",
+                  "title": "Collection of FolderContent",
+                  "properties": {
+                    "@count": {
+                      "$ref": "#/components/schemas/count"
+                    },
+                    "value": {
+                      "type": "array",
+                      "items": {
+                        "$ref": "#/components/schemas/DMSService.FolderContent"
+                      }
+                    }
+                  }
+                }
+              }
+            }
+          },
+          "4XX": {
+            "$ref": "#/components/responses/error"
+          }
+        }
+      },
+      "post": {
+        "summary": "Creates a single folder content.",
+        "tags": [
+          "Folder Content"
+        ],
+        "requestBody": {
+          "description": "New folder content",
+          "required": true,
+          "content": {
+            "application/json": {
+              "schema": {
+                "$ref": "#/components/schemas/DMSService.FolderContent-create"
+              }
+            }
+          }
+        },
+        "responses": {
+          "201": {
+            "description": "Created folder content",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/DMSService.FolderContent"
+                }
+              }
+            }
+          },
+          "4XX": {
+            "$ref": "#/components/responses/error"
+          }
+        }
+      }
+    },
+    "/FolderContent('{objectId}')": {
+      "parameters": [
+        {
+          "description": "key: objectId",
+          "in": "path",
+          "name": "objectId",
+          "required": true,
+          "schema": {
+            "type": "string"
+          }
+        }
+      ],
+      "get": {
+        "summary": "Retrieves a single folder content.",
+        "tags": [
+          "Folder Content"
+        ],
+        "parameters": [
+          {
+            "name": "$select",
+            "description": "Select properties to be returned, see [Select](http://docs.oasis-open.org/odata/odata/v4.01/odata-v4.01-part1-protocol.html#sec_SystemQueryOptionselect)",
+            "in": "query",
+            "explode": false,
+            "schema": {
+              "type": "array",
+              "uniqueItems": true,
+              "items": {
+                "type": "string",
+                "enum": [
+                  "objectId",
+                  "name",
+                  "type",
+                  "mimeType",
+                  "size",
+                  "createdAt",
+                  "createdBy"
+                ]
+              }
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Retrieved folder content",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/DMSService.FolderContent"
+                }
+              }
+            }
+          },
+          "4XX": {
+            "$ref": "#/components/responses/error"
+          }
+        }
+      },
+      "patch": {
+        "summary": "Changes a single folder content.",
+        "tags": [
+          "Folder Content"
+        ],
+        "requestBody": {
+          "description": "New property values",
+          "required": true,
+          "content": {
+            "application/json": {
+              "schema": {
+                "$ref": "#/components/schemas/DMSService.FolderContent-update"
+              }
+            }
+          }
+        },
+        "responses": {
+          "204": {
+            "description": "Success"
+          },
+          "4XX": {
+            "$ref": "#/components/responses/error"
+          }
+        }
+      },
+      "delete": {
+        "summary": "Deletes a single folder content.",
+        "tags": [
+          "Folder Content"
+        ],
+        "responses": {
+          "204": {
+            "description": "Success"
+          },
+          "4XX": {
+            "$ref": "#/components/responses/error"
+          }
+        }
+      }
+    },
+    "/GetFolderContent": {
+      "get": {
+        "summary": "Invokes function GetFolderContent",
+        "tags": [
+          "Folder Content"
+        ],
+        "parameters": [
+          {
+            "required": false,
+            "in": "query",
+            "name": "EquipmentID",
+            "description": "String value needs to be enclosed in single quotes",
+            "schema": {
+              "type": "string",
+              "nullable": true,
+              "pattern": "^(null|'([^']|'')*')$",
+              "default": "null"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Success",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "type": "object",
+                  "title": "Collection of FolderContent",
+                  "properties": {
+                    "@count": {
+                      "$ref": "#/components/schemas/count"
+                    },
+                    "value": {
+                      "type": "array",
+                      "items": {
+                        "$ref": "#/components/schemas/DMSService.FolderContent"
+                      }
+                    }
+                  }
+                }
+              }
+            }
+          },
+          "4XX": {
+            "$ref": "#/components/responses/error"
+          }
+        }
+      }
+    }
+  },
+  "components": {
+    "schemas": {
+      "DMSService.FolderContent": {
+        "title": "FolderContent",
+        "type": "object",
+        "properties": {
+          "objectId": {
+            "type": "string"
+          },
+          "name": {
+            "type": "string",
+            "nullable": true
+          },
+          "type": {
+            "type": "string",
+            "nullable": true
+          },
+          "mimeType": {
+            "type": "string",
+            "nullable": true
+          },
+          "size": {
+            "anyOf": [
+              {
+                "type": "integer",
+                "format": "int64"
+              },
+              {
+                "type": "string"
+              }
+            ],
+            "example": "42",
+            "nullable": true
+          },
+          "createdAt": {
+            "type": "string",
+            "format": "date-time",
+            "example": "2017-04-13T15:51:04.0000000Z",
+            "nullable": true
+          },
+          "createdBy": {
+            "type": "string",
+            "nullable": true
+          }
+        }
+      },
+      "DMSService.FolderContent-create": {
+        "title": "FolderContent (for create)",
+        "type": "object",
+        "properties": {
+          "objectId": {
+            "type": "string"
+          },
+          "name": {
+            "type": "string",
+            "nullable": true
+          },
+          "type": {
+            "type": "string",
+            "nullable": true
+          },
+          "mimeType": {
+            "type": "string",
+            "nullable": true
+          },
+          "size": {
+            "anyOf": [
+              {
+                "type": "integer",
+                "format": "int64"
+              },
+              {
+                "type": "string"
+              }
+            ],
+            "example": "42",
+            "nullable": true
+          },
+          "createdAt": {
+            "type": "string",
+            "format": "date-time",
+            "example": "2017-04-13T15:51:04.0000000Z",
+            "nullable": true
+          },
+          "createdBy": {
+            "type": "string",
+            "nullable": true
+          }
+        },
+        "required": [
+          "objectId"
+        ]
+      },
+      "DMSService.FolderContent-update": {
+        "title": "FolderContent (for update)",
+        "type": "object",
+        "properties": {
+          "name": {
+            "type": "string",
+            "nullable": true
+          },
+          "type": {
+            "type": "string",
+            "nullable": true
+          },
+          "mimeType": {
+            "type": "string",
+            "nullable": true
+          },
+          "size": {
+            "anyOf": [
+              {
+                "type": "integer",
+                "format": "int64"
+              },
+              {
+                "type": "string"
+              }
+            ],
+            "example": "42",
+            "nullable": true
+          },
+          "createdAt": {
+            "type": "string",
+            "format": "date-time",
+            "example": "2017-04-13T15:51:04.0000000Z",
+            "nullable": true
+          },
+          "createdBy": {
+            "type": "string",
+            "nullable": true
+          }
+        }
+      },
+      "count": {
+        "anyOf": [
+          {
+            "type": "number"
+          },
+          {
+            "type": "string"
+          }
+        ],
+        "description": "The number of entities in the collection. Available when using the [$count](http://docs.oasis-open.org/odata/odata/v4.01/odata-v4.01-part1-protocol.html#sec_SystemQueryOptioncount) query option."
+      },
+      "error": {
+        "type": "object",
+        "required": [
+          "error"
+        ],
+        "properties": {
+          "error": {
+            "type": "object",
+            "required": [
+              "code",
+              "message"
+            ],
+            "properties": {
+              "code": {
+                "type": "string"
+              },
+              "message": {
+                "type": "string"
+              },
+              "target": {
+                "type": "string"
+              },
+              "details": {
+                "type": "array",
+                "items": {
+                  "type": "object",
+                  "required": [
+                    "code",
+                    "message"
+                  ],
+                  "properties": {
+                    "code": {
+                      "type": "string"
+                    },
+                    "message": {
+                      "type": "string"
+                    },
+                    "target": {
+                      "type": "string"
+                    }
+                  }
+                }
+              },
+              "innererror": {
+                "type": "object",
+                "description": "The structure of this object is service-specific"
+              }
+            }
+          }
+        }
+      }
+    },
+    "parameters": {
+      "top": {
+        "name": "$top",
+        "in": "query",
+        "description": "Show only the first n items, see [Paging - Top](http://docs.oasis-open.org/odata/odata/v4.01/odata-v4.01-part1-protocol.html#sec_SystemQueryOptiontop)",
+        "schema": {
+          "type": "integer",
+          "minimum": 0
+        },
+        "example": 50
+      },
+      "skip": {
+        "name": "$skip",
+        "in": "query",
+        "description": "Skip the first n items, see [Paging - Skip](http://docs.oasis-open.org/odata/odata/v4.01/odata-v4.01-part1-protocol.html#sec_SystemQueryOptionskip)",
+        "schema": {
+          "type": "integer",
+          "minimum": 0
+        }
+      },
+      "count": {
+        "name": "$count",
+        "in": "query",
+        "description": "Include count of items, see [Count](http://docs.oasis-open.org/odata/odata/v4.01/odata-v4.01-part1-protocol.html#sec_SystemQueryOptioncount)",
+        "schema": {
+          "type": "boolean"
+        }
+      },
+      "search": {
+        "name": "$search",
+        "in": "query",
+        "description": "Search items by search phrases, see [Searching](http://docs.oasis-open.org/odata/odata/v4.01/odata-v4.01-part1-protocol.html#sec_SystemQueryOptionsearch)",
+        "schema": {
+          "type": "string"
+        }
+      }
+    },
+    "responses": {
+      "error": {
+        "description": "Error",
+        "content": {
+          "application/json": {
+            "schema": {
+              "$ref": "#/components/schemas/error"
+            }
+          }
+        }
+      }
+    }
+  }
+}
