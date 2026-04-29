@@ -25,3 +25,17 @@ RepairID;FailureCode;Description;Resolution;RepairDate;up__EquipmentID
 24;F024;Seat leakage detected;"Lapped seat and replaced seat ring; performed leak test";2024-12-03;MOTOR-9001
 25;F025;Positioner calibration drift;Recalibrated positioner and updated firmware parameters;2024-12-10;VALVE-1201
 26;F026;Pressure roller adjustment;Adjust screws so that plunger  will have clearance;2026-04-01;Model-245
+27;F001;Mechanical seal leakage causing overheating;Replaced leaking seal assembly and tightened gland arrangement.;2026-04-29;PUMP-1001
+28;F001;Seal degradation causing elevated casing temperature;Installed new seal kit and inspected seal chamber for damage.;2026-04-29;PUMP-1001
+29;F001;Recurrent overheating after seal wear;Replaced worn seal, checked lubrication condition, and performed temperature test run.;2026-04-29;PUMP-1001
+30;F001;Pump temperature rise due to worn seal and friction;Replaced seal components and corrected friction point during reassembly.;2026-04-29;PUMP-1001
+31;F005;Control unit overheating due to cooling failure;Restored cooling airflow and replaced faulty cooling fan.;2026-04-29;VALVE-1201
+32;F005;Electrical cooling failure causing valve actuator temperature rise;Cleaned ventilation path and repaired cooling circuit connection.;2026-04-29;VALVE-1201
+33;F005;Actuator overheating from failed cooling assembly;Replaced cooling module and verified actuator operating temperature.;2026-04-29;VALVE-1201
+34;F005;Cooling fault leading to intermittent electrical shutdown;Repaired cooling system power supply and tested continuous operation.;2026-04-29;VALVE-1201
+35;F005;Valve control overheating caused by inadequate cooling;Restored cooling function and inspected actuator enclosure for heat damage.;2026-04-29;VALVE-1201
+36;F002;Abnormal vibration due to bearing failure;Replaced failed bearings and performed shaft alignment check.;2026-04-29;PUMP-1002
+37;F002;Bearing wear causing noise and vibration in pump;Installed new bearing set and rebalanced rotating components.;2026-04-29;PUMP-1002
+38;F002;Pump bearing failure resulting in elevated vibration levels;Removed damaged bearings and verified housing fit before reassembly.;2026-04-29;PUMP-1002
+39;F002;Excessive shaft vibration caused by worn bearings;Replaced bearings and completed post-maintenance vibration measurement.;2026-04-29;PUMP-1002
+40;F002;Bearing degradation leading to unstable pump operation;Changed bearing assembly and confirmed smooth operation during trial run.;2026-04-29;PUMP-1002
