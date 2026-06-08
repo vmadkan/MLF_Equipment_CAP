@@ -5,3 +5,8 @@ F003;Impeller Blockage;Hydraulic;COMP-3001
 F004;Lubrication Fault;Thermal;MOTOR-9001
 F005;Cooling Failure;Electrical;VALVE-1201
 F026;Pressure Roller Failure;Mechanical;Model-245
+F031;Seal Bar Overheating;Thermal;33250
+F032;Vacuum Loss During Forming;Mechanical;35071
+F033;Hoist Motor Overload;Electrical;36558
+F034;lade Wear / Dull Cutting;Mechanical;36655
+F035;Film Tracking Misalignment;Mechanical;39067

@@ -39,3 +39,36 @@ RepairID;FailureCode;Description;Resolution;RepairDate;up__EquipmentID
 38;F002;Pump bearing failure resulting in elevated vibration levels;Removed damaged bearings and verified housing fit before reassembly.;2026-04-29;PUMP-1002
 39;F002;Excessive shaft vibration caused by worn bearings;Replaced bearings and completed post-maintenance vibration measurement.;2026-04-29;PUMP-1002
 40;F002;Bearing degradation leading to unstable pump operation;Changed bearing assembly and confirmed smooth operation during trial run.;2026-04-29;PUMP-1002
+101;F033;Vat over travelled on conveyor causing crane fault;"Manually moved vat and restarted crane; confirmed normal operation.";2026-05-16;36558
+102;F033;Satellite not home fault on Crane 63;Reset crane 63 satellite not home fault.;2026-05-12;36558
+103;F033;Satellite not home fault on Crane 63 (recurrence);Reset crane 63 satellite not home fault.;2026-05-12;36558
+104;F033;Satellite stuck in extended position;Retracted satellite and restored to home position.;2026-05-12;36558
+105;F033;Satellite on wrong side of crane;Repositioned satellite to correct side and verified operation.;2026-06-08;36558
+106;F033;Satellite overhang detected on Crane 63;Corrected satellite overhang and confirmed proper positioning.;2026-05-03;36558
+107;F033;Cribb with full load stuck between conveyor and satellite home position;"Cleared obstruction between conveyor and satellite home position; resumed operation.";2026-05-05;36558
+201;F035;Brake resistor failure on forming axis 2;Replaced brake resistor for Hall 7A MultiVac forming axis 2.;2026-05-11;39067
+202;F035;Discharge sprocket worn out;Sourced replacement sprocket from Hall 4 and installed on 7A discharge unit.;0026-05-07;39067
+203;F035;Guard 30 operator-side sensor failure;Troubleshot and replaced faulty operator-side sensor (SAP# 107420945, Qty 4).;2026-05-06;39067
+204;F035;Cross cut #1 not cutting;"Replaced solenoid valve on cross cut #1; verified cutting operation.";2026-05-04;39067
+205;F035;Printer cover clip broken;Replaced broken printer cover clip.;2026-04-28;39067
+206;F035;Film chain tension slipping on operator side;Inspected and re-tensioned film chain on operator side.;2026-04-19;39067
+301;F032;Zipper unwind brake not working;Replaced brake for zipper unwind (SAP 60189634).;2026-05-13;35071
+302;F032;Top film tracking out of alignment;Realigned top film tracking, re-taught sensor, and reduced advance speed.;2026-05-12;35071
+303;F032;Splice bed sensor broken and cable connector damaged;Replaced broken splice bed sensor and repaired damaged cable connector.;2026-05-06;35071
+304;F032;Lower inner swing arm bearings worn;Replaced worn bearings on lower inner swing arm.;2026-05-04;35071
+305;F032;Reed switches failed on MultiVac;Replaced 2 reed switches (SAP# 60144492).;2026-05-02;35071
+306;F032;Forming station motor insulation failure (0 MΩ to ground);Replaced forming station motor (SAP 60239109) and cable (SAP 60156886).;2022026-04-306-06-08;35071
+401;F034;Log lift magnet misalignment on slicer;Adjusted Hall 12 log lift magnet alignment for slicer.;2026-05-07;36655
+402;F034;Light conductor malfunction on Weber slicer;Diagnosed and resolved light conductor issue.;2026-05-05;36655
+403;F034;Scale belts stretched beyond tolerance;Replaced stretched scale belts (SAP 60157343).;2026-05-01;36655
+404;F034;Buffer blue rollers worn;Replaced worn blue rollers as required (SAP 60157343, 60241316×16).;2026-04-30;36655
+405;F034;CCU1 and CCU2 toothed belt damaged;Replaced damaged toothed belt on CCU1 and CCU2.;2026-04-29;36655
+406;F034;uffer conveyor belts worn causing blue shavings;Replaced worn buffer conveyor belts (SAP 60157570).;2026-04-29;36655
+501;F031;Guard 1 magnet mispositioned, not providing signal to sensor;"Adjusted guard 1 magnet on non-operator side to restore sensor signal; follow-up created.";2026-05-12;33250
+502;F031;X-cut knife #3 misfiring intermittently;"Replaced knife pilot valve; tested and confirmed proper operation for remainder of shift.";2026-05-07;33250
+503;F031;Canister missing seal;"Replaced canister seal with right-angle rubber seal (SAP 60246658, 2m).;2026-05-07;33250
+504;F031;Cross cutter 3 not cutting — sheath bent preventing knife protrusion;"Straightened bent sheath to allow knife to protrude fully; verified cutting.";2026-05-06;33250
+505;F031;Vacuum not reaching target level;"Tightened fittings on valve and set all booster pumps to manual; vacuum restored.";2026-05-02;33250
+506;F031;Discharge belt slipping due to water ingress;Removed belt, dried area, reassembled and tested discharge belt.;2026-05-01;33250
+507;F031;Dull blades and star grip knob short on cassette;Replaced 4 blades and star grip knob (SAP 60178480×1, 60131051×4).;2026-04-24;33250
+508;F031;Cross cut blade worn, packages not fully separated;Replaced worn blade and adjusted stroke for complete cut-through.;2026-04-23;33250
